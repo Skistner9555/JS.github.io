@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mostrar Gato</title>
+</head>
+<body>
+    <div style="text-align: center; margin-top: 50px;">
+        <button id="mostrarGato" onclick="mostrarGato()">Mostrar Gato</button>
+    </div>
+    
+    <div id="imagenGato" style="text-align: center; margin-top: 20px; display: none;">
+        <!-- La imagen del gato se mostrará aquí -->
+    </div>
+
+    <script>
+        function mostrarGato() {
+            // Realizar una solicitud a la API para obtener la imagen del gato
+            fetch('https://api.thecatapi.com/v1/images/search')
+                .then(response => response.json())
+                .then(data => {
+                    // Mostrar la imagen del gato
+                    const gato = data[0];
+                    const imagenGato = document.getElementById('imagenGato');
+                    imagenGato.innerHTML = `<img src="${gato.url}" alt="Gato" width="${gato.width}" height="${gato.height}">`;
+                    imagenGato.style.display = 'block';
+                })
+                .catch(error => console.error('Error al obtener la imagen del gato:', error));
+        }
+    </script>
+</body>
+</html>
